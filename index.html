@@ -5,23 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Animated Notification Bar</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/5af1316d11.js" 
+    crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="buttons">
-        <button onclick="showToast()">Success</button>
-        <button onclick="showToast()">Error</button>
-        <button onclick="showToast()">Invalid</button>
+        <button onclick="showToast(successMessage)">Success</button>
+        <button onclick="showToast(errorMessage)">Error</button>
+        <button onclick="showToast(invalidMessage)">Invalid</button>
     </div>
     <div id="toastBox"></div>
 
     <script>
         let toastBox = document.getElementById('toastBox');
-        function showToast(){
+        let successMessage = '<i class="fa-regular fa-font-awesome"></i>Successfully Submitted';
+        let errorMessage = '<i class="fa-solid fa-circle-exclamation"></i>Please fix the error!';
+        let invalidMessage = '<i class="fa-solid fa-virus-covid"></i>Invalid input, please check again';
+
+        function showToast(msg){
             
             let toast = document.createElement('div');
             toast.classList.add('toast');
-            toast.innerHTML ='success';
+            toast.innerHTML = msg;
             toastBox.appendChild(toast);
+
+            if (msg.includes('error')){
+                toast.classList.add('error')
+            }
+            if (msg.includes('Invalid')){
+                toast.classList.add('Invalid')
+            }
+
+            setTimeout(()=> {
+                toast.remove();
+            }, 5000);
         }
     </script>
 </body>
